@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OCCUPATIONAL MEDICINE UNFILTERED</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@300;400;600;900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --bg: #F5F5DC;
+            --text: #1a1a1a;
+            --accent: #FF0000;
+            --yellow: #FFD700;
+            --green: #00FF00;
+            --blue: #0000FF;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+        
+        /* Ticker */
+        .ticker {
+            background: var(--accent);
+            color: white;
+            padding: 10px 0;
+            white-space: nowrap;
+            overflow: hidden;
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .ticker-content {
+            display: inline-block;
+            padding-left: 100%;
+            animation: ticker 30s linear infinite;
+        }
+        
+        @keyframes ticker {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-100%, 0); }
+        }
+        
+        /* Header */
+        .header {
+            padding: 40px 20px;
+            text-align: center;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(0,0,0,.03) 10px,
+                rgba(0,0,0,.03) 20px
+            );
+        }
+        
+        .logo {
+            font-size: clamp(24px, 5vw, 48px);
+            font-weight: 900;
+            letter-spacing: -2px;
+            line-height: 0.9;
+            margin-bottom: 10px;
+        }
+        
+        .logo span {
+            display: block;
+        }
+        
+        .logo .line1 {
+            color: var(--text);
+        }
+        
+        .logo .line2 {
+            color: var(--accent);
+            font-style: italic;
+            margin-left: 20px;
+        }
+        
+        .tagline {
+            font-family: 'Space Mono', monospace;
+            font-size: 14px;
+            color: #666;
+            margin-top: 20px;
+        }
+        
+        /* Main Content */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Countdown Section */
+        .countdown-section {
+            margin: 60px 0;
+            background: white;
+            border: 3px solid var(--text);
+            padding: 40px;
+            position: relative;
+            box-shadow: 10px 10px 0 var(--yellow);
+        }
+        
+        .countdown-section::before {
+            content: 'URGENT';
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            background: var(--accent);
+            color: white;
+            padding: 5px 15px;
+            font-weight: 700;
+            font-size: 12px;
+            letter-spacing: 1px;
+            transform: rotate(-5deg);
+        }
+        
+        .countdown-title {
+            font-size: 24px;
+            font-weight: 900;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+        
+        .countdown-unit {
+            text-align: center;
+            min-width: 80px;
+        }
+        
+        .countdown-number {
+            font-family: 'Space Mono', monospace;
+            font-size: 48px;
+            font-weight: 700;
+            display: block;
+            background: var(--text);
+            color: white;
+            padding: 10px;
+            margin-bottom: 5px;
+        }
+        
+        .countdown-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #666;
+        }
+        
+        .meeting-info {
+            text-align: center;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        
+        .meeting-info strong {
+            background: var(--green);
+            padding: 2px 5px;
+        }
+        
+        .time-primary {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 10px 0;
+        }
+        
+        .time-zones {
+            margin: 20px 0;
+        }
+        
+        .your-time {
+            background: var(--yellow);
+            padding: 10px 15px;
+            margin: 10px 0;
+            font-size: 16px;
+            border: 2px solid var(--text);
+        }
+        
+        .your-time strong {
+            background: none;
+            padding: 0;
+        }
+        
+        #localTime {
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+        }
+        
+        .global-times {
+            margin-top: 15px;
+        }
+        
+        .global-times summary {
+            cursor: pointer;
+            font-weight: 600;
+            padding: 8px 12px;
+            background: white;
+            border: 1px solid var(--text);
+            display: inline-block;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .global-times summary:hover {
+            background: var(--text);
+            color: white;
+        }
+        
+        .time-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            margin-top: 15px;
+            padding: 15px;
+            background: rgba(255,255,255,0.5);
+            border: 1px solid #ddd;
+        }
+        
+        .time-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px;
+            background: white;
+            border: 1px solid #eee;
+            font-size: 14px;
+        }
+        
+        .time-item .city {
+            font-weight: 600;
+        }
+        
+        .time-item .time {
+            font-family: 'Space Mono', monospace;
+            color: var(--accent);
+            font-weight: 700;
+        }
+        
+        /* Info Cards */
+        .info-grid {
+            display: grid;
+            gap: 30px;
+            margin: 60px 0;
+        }
+        
+        .info-card {
+            background: white;
+            border: 2px solid var(--text);
+            padding: 30px;
+            position: relative;
+            transition: transform 0.2s;
+        }
+        
+        .info-card:nth-child(1) {
+            box-shadow: 8px 8px 0 var(--blue);
+        }
+        
+        .info-card:nth-child(2) {
+            box-shadow: 8px 8px 0 var(--green);
+        }
+        
+        .info-card:nth-child(3) {
+            box-shadow: 8px 8px 0 var(--yellow);
+        }
+        
+        .info-card:hover {
+            transform: translate(-3px, -3px);
+        }
+        
+        .info-card h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            font-weight: 900;
+        }
+        
+        .info-card p {
+            line-height: 1.8;
+            color: #333;
+        }
+        
+        /* Quote */
+        .quote-block {
+            margin: 80px 0;
+            padding: 40px;
+            background: var(--text);
+            color: white;
+            transform: rotate(-1deg);
+        }
+        
+        .quote-text {
+            font-size: clamp(18px, 3vw, 24px);
+            line-height: 1.6;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        
+        .quote-author {
+            text-align: right;
+            font-family: 'Space Mono', monospace;
+            font-size: 14px;
+        }
+        
+        /* CTA */
+        .cta-section {
+            text-align: center;
+            margin: 80px 0;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 20px 40px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 20px;
+            border: 3px solid var(--text);
+            position: relative;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .cta-button:hover {
+            background: var(--text);
+            transform: translate(-5px, -5px);
+            box-shadow: 5px 5px 0 var(--accent);
+        }
+        
+        .cta-note {
+            margin-top: 20px;
+            font-family: 'Space Mono', monospace;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        /* Manifesto */
+        .manifesto {
+            background: repeating-linear-gradient(
+                0deg,
+                white,
+                white 20px,
+                #f0f0f0 20px,
+                #f0f0f0 21px
+            );
+            padding: 40px;
+            margin: 60px 0;
+            border: 1px solid #ddd;
+            font-family: 'Space Mono', monospace;
+            font-size: 14px;
+            line-height: 20px;
+        }
+        
+        .manifesto h3 {
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .manifesto ol {
+            counter-reset: item;
+            list-style: none;
+        }
+        
+        .manifesto li {
+            counter-increment: item;
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .manifesto li::before {
+            content: counter(item, decimal-leading-zero);
+            position: absolute;
+            left: 0;
+            font-weight: 700;
+            color: var(--accent);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--text);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: 100px;
+        }
+        
+        .footer-hashtag {
+            font-family: 'Space Mono', monospace;
+            font-size: 18px;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+        
+        .footer-text {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+        
+        /* Mobile */
+        @media (max-width: 768px) {
+            .countdown {
+                gap: 10px;
+            }
+            
+            .countdown-number {
+                font-size: 36px;
+            }
+            
+            .countdown-unit {
+                min-width: 70px;
+            }
+            
+            .info-card {
+                margin-bottom: 20px;
+            }
+            
+            .quote-block {
+                transform: none;
+                padding: 20px;
+            }
+            
+            .manifesto {
+                padding: 20px;
+            }
+            
+            .email-card {
+                padding: 30px 20px;
+            }
+            
+            .form-group {
+                flex-direction: column;
+            }
+            
+            .email-input {
+                border-right: 2px solid var(--text);
+                border-bottom: none;
+            }
+            
+            .submit-btn {
+                width: 100%;
+                border-top: none;
+            }
+        }
+        
+        /* Highlight Animation */
+        @keyframes highlight {
+            0% { background-position: 0 0; }
+            100% { background-position: 200% 0; }
+        }
+        
+        .highlight {
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                var(--yellow) 10%, 
+                var(--yellow) 90%, 
+                transparent 100%
+            );
+            background-size: 200% 100%;
+            animation: highlight 3s ease-in-out infinite;
+            padding: 2px 5px;
+        }
+        
+        /* Email Capture */
+        .email-section {
+            margin: 80px 0;
+        }
+        
+        .email-card {
+            background: white;
+            border: 3px solid var(--text);
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            box-shadow: 8px 8px 0 var(--accent);
+        }
+        
+        .email-card::before {
+            content: '✉';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--bg);
+            padding: 0 10px;
+            font-size: 30px;
+        }
+        
+        .email-card h3 {
+            font-size: 28px;
+            font-weight: 900;
+            margin-bottom: 10px;
+            letter-spacing: -1px;
+        }
+        
+        .email-card > p {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+        
+        .email-form {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            display: flex;
+            gap: 0;
+            margin-bottom: 20px;
+        }
+        
+        .email-input {
+            flex: 1;
+            padding: 15px 20px;
+            font-size: 16px;
+            font-family: 'Space Mono', monospace;
+            border: 2px solid var(--text);
+            border-right: none;
+            background: white;
+            outline: none;
+            transition: all 0.2s;
+        }
+        
+        .email-input:focus {
+            background: #fffef0;
+        }
+        
+        .email-input::placeholder {
+            color: #999;
+        }
+        
+        .submit-btn {
+            padding: 15px 30px;
+            background: var(--text);
+            color: white;
+            border: 2px solid var(--text);
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        
+        .submit-btn:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+        
+        .form-message {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 4px;
+            font-weight: 600;
+            display: none;
+        }
+        
+        .form-message.success {
+            background: var(--green);
+            color: var(--text);
+            display: block;
+        }
+        
+        .form-message.error {
+            background: var(--accent);
+            color: white;
+            display: block;
+        }
+        
+        .privacy-note {
+            font-size: 12px;
+            color: #999;
+            margin-top: 15px;
+            font-family: 'Space Mono', monospace;
+        }
+    </style>
+</head>
+<body>
+    <!-- Ticker -->
+    <div class="ticker">
+        <div class="ticker-content">
+            BREAKING: FIRST GLOBAL PRACTITIONER-LED FORUM ON OCCUPATIONAL MEDICINE • SEPTEMBER 13, 2025 • NO POLITICS, JUST SOLUTIONS • MESSAGE DR. RAZAVI ON LINKEDIN • 
+        </div>
+    </div>
+    
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <span class="line1">OCCUPATIONAL MEDICINE</span>
+            <span class="line2">UNFILTERED</span>
+        </div>
+        <p class="tagline">[ PRACTITIONER-LED REFORM INITIATIVE ]</p>
+    </header>
+    
+    <div class="container">
+        <!-- Countdown -->
+        <section class="countdown-section">
+            <h2 class="countdown-title">⏰ COUNTDOWN TO GLOBAL MEETING</h2>
+            
+            <div class="countdown" id="countdown">
+                <div class="countdown-unit">
+                    <span class="countdown-number" id="days">--</span>
+                    <span class="countdown-label">Days</span>
+                </div>
+                <div class="countdown-unit">
+                    <span class="countdown-number" id="hours">--</span>
+                    <span class="countdown-label">Hours</span>
+                </div>
+                <div class="countdown-unit">
+                    <span class="countdown-number" id="minutes">--</span>
+                    <span class="countdown-label">Mins</span>
+                </div>
+                <div class="countdown-unit">
+                    <span class="countdown-number" id="seconds">--</span>
+                    <span class="countdown-label">Secs</span>
+                </div>
+            </div>
+            
+            <div class="meeting-info">
+                <strong>SATURDAY, SEPTEMBER 13, 2025</strong><br>
+                <div class="time-primary">5:00 AM Calgary Time (MDT)</div>
+                <div class="time-zones">
+                    <div class="your-time">
+                        <strong>Your Local Time:</strong> <span id="localTime">Calculating...</span>
+                    </div>
+                    <details class="global-times">
+                        <summary>View Global Times</summary>
+                        <div class="time-grid">
+                            <div class="time-item">
+                                <span class="city">Sydney</span>
+                                <span class="time" id="sydney">--</span>
+                            </div>
+                            <div class="time-item">
+                                <span class="city">Tokyo</span>
+                                <span class="time" id="tokyo">--</span>
+                            </div>
+                            <div class="time-item">
+                                <span class="city">Singapore</span>
+                                <span class="time" id="singapore">--</span>
+                            </div>
+                            <div class="time-item">
+                                <span class="city">Dubai</span>
+                                <span class="time" id="dubai">--</span>
+                            </div>
+                            <div class="time-item">
+                                <span class="city">London</span>
+                                <span class="time" id="london">--</span>
+                            </div>
+                            <div class="time-item">
+                                <span class="city">New York</span>
+                                <span class="time" id="newyork">--</span>
+                            </div>
+                        </div>
+                    </details>
+                </div>
+                <span class="highlight">Scheduled for maximum Asia-Pacific participation</span>
+            </div>
+        </section>
+        
+        <!-- Info Cards -->
+        <div class="info-grid">
+            <div class="info-card">
+                <h3>THE PROBLEM</h3>
+                <p>How many occupational health nurses and physicians do we actually need per working population? Nobody knows. There's no global standard. No evidence-based ratio. Just guesswork and politics.</p>
+            </div>
+            
+            <div class="info-card">
+                <h3>THE SOLUTION</h3>
+                <p>Practitioners from around the world coming together to establish real, implementable standards. Not conferences. Not committees. Action. Starting with one critical question that affects billions of workers.</p>
+            </div>
+            
+            <div class="info-card">
+                <h3>THE MOVEMENT</h3>
+                <p>This isn't another professional society. It's unfiltered dialogue between those who actually do the work. From New Zealand to the Americas, we're building something that matters.</p>
+            </div>
+        </div>
+        
+        <!-- Manifesto -->
+        <div class="manifesto">
+            <h3>UNFILTERED MANIFESTO</h3>
+            <ol>
+                <li>We are practitioners, not politicians</li>
+                <li>We deal in evidence, not ideology</li>
+                <li>We prioritize workers, not bureaucracy</li>
+                <li>We seek global standards, not local politics</li>
+                <li>We demand action, not endless discussion</li>
+                <li>We build from the frontline up, not top down</li>
+                <li>We measure success in lives protected</li>
+            </ol>
+        </div>
+        
+        <!-- Email Capture -->
+        <section class="email-section">
+            <div class="email-card">
+                <h3>STAY INFORMED</h3>
+                <p>Get updates on the movement. No spam. No politics. Just progress.</p>
+                <form id="emailForm" class="email-form">
+                    <div class="form-group">
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email" 
+                            placeholder="your.email@example.com" 
+                            required
+                            class="email-input"
+                        >
+                        <button type="submit" class="submit-btn">
+                            JOIN →
+                        </button>
+                    </div>
+                    <div class="form-message" id="formMessage"></div>
+                </form>
+                <p class="privacy-note">
+                    We respect your privacy. Unsubscribe anytime.
+                </p>
+            </div>
+        </section>
+        
+        <!-- Quote -->
+        <div class="quote-block">
+            <blockquote class="quote-text">
+                "This level of discussion is only possible with physicians who are trained in Occupational Medicine. Not just interested. Not just experienced. Formally trained. Because this isn't Public Health. It isn't Brain Surgery. This is Occupational Medicine."
+            </blockquote>
+            <p class="quote-author">— DR. JALEES RAZAVI</p>
+        </div>
+        
+        <!-- CTA -->
+        <section class="cta-section">
+            <a href="https://www.linkedin.com/in/jalees-razavi/" target="_blank" class="cta-button">
+                JOIN THE MOVEMENT →
+            </a>
+            <p class="cta-note">[ MESSAGE DR. RAZAVI DIRECTLY ON LINKEDIN ]</p>
+        </section>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <p class="footer-hashtag">#OCCUPATIONALMEDICINEUNFILTERED</p>
+        <p class="footer-text">Building something enduring—together.</p>
+    </footer>
+    
+    <script>
+        // Countdown
+        function updateCountdown() {
+            const target = new Date('2025-09-13T05:00:00-06:00');
+            const now = new Date();
+            const diff = target - now;
+            
+            if (diff > 0) {
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+                
+                document.getElementById('days').textContent = String(days).padStart(2, '0');
+                document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+                document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+                document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+            }
+        }
+        
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+        
+        // Ticker duplication for seamless loop
+        const ticker = document.querySelector('.ticker-content');
+        ticker.innerHTML += ticker.innerHTML;
+        
+        // Time zone calculations
+        function calculateTimeZones() {
+            const meetingDate = new Date('2025-09-13T05:00:00-06:00'); // Calgary MDT
+            
+            // Format options
+            const timeOptions = {
+                hour: 'numeric',
+                minute: '2-digit',
+                hour12: true
+            };
+            
+            const dateTimeOptions = {
+                weekday: 'short',
+                month: 'short',
+                day: 'numeric',
+                hour: 'numeric',
+                minute: '2-digit',
+                hour12: true
+            };
+            
+            // Local time
+            const localTimeStr = meetingDate.toLocaleString('en-US', dateTimeOptions);
+            document.getElementById('localTime').textContent = localTimeStr;
+            
+            // City times
+            const cities = {
+                'sydney': 'Australia/Sydney',
+                'tokyo': 'Asia/Tokyo',
+                'singapore': 'Asia/Singapore',
+                'dubai': 'Asia/Dubai',
+                'london': 'Europe/London',
+                'newyork': 'America/New_York'
+            };
+            
+            for (const [id, timezone] of Object.entries(cities)) {
+                try {
+                    const cityTime = meetingDate.toLocaleString('en-US', {
+                        ...timeOptions,
+                        timeZone: timezone
+                    });
+                    
+                    // Check if it's a different day
+                    const cityDate = meetingDate.toLocaleString('en-US', {
+                        timeZone: timezone,
+                        month: 'short',
+                        day: 'numeric'
+                    });
+                    
+                    const calgaryDate = meetingDate.toLocaleString('en-US', {
+                        timeZone: 'America/Edmonton',
+                        month: 'short',
+                        day: 'numeric'
+                    });
+                    
+                    let displayTime = cityTime;
+                    if (cityDate !== calgaryDate) {
+                        // Add date indicator if different day
+                        displayTime = `${cityTime} (${cityDate})`;
+                    }
+                    
+                    document.getElementById(id).textContent = displayTime;
+                } catch (e) {
+                    document.getElementById(id).textContent = 'Error';
+                }
+            }
+        }
+        
+        // Calculate times on load
+        calculateTimeZones();
+        
+        // Email form handling
+        document.getElementById('emailForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const messageDiv = document.getElementById('formMessage');
+            const submitBtn = document.querySelector('.submit-btn');
+            
+            // Basic email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                messageDiv.textContent = 'Please enter a valid email address.';
+                messageDiv.className = 'form-message error';
+                return;
+            }
+            
+            // Disable button and show loading state
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'JOINING...';
+            
+            // Simulate form submission (replace with actual API call)
+            setTimeout(() => {
+                // Success response
+                messageDiv.textContent = 'Welcome to the movement! Check your inbox for confirmation.';
+                messageDiv.className = 'form-message success';
+                
+                // Reset form
+                document.getElementById('email').value = '';
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'JOIN →';
+                
+                // Store email in localStorage (temporary solution)
+                const emails = JSON.parse(localStorage.getItem('oem_emails') || '[]');
+                emails.push({
+                    email: email,
+                    timestamp: new Date().toISOString()
+                });
+                localStorage.setItem('oem_emails', JSON.stringify(emails));
+                
+                // Hide message after 5 seconds
+                setTimeout(() => {
+                    messageDiv.style.display = 'none';
+                }, 5000);
+            }, 1000);
+        });
+        
+        // Clear message when user starts typing
+        document.getElementById('email').addEventListener('input', function() {
+            const messageDiv = document.getElementById('formMessage');
+            messageDiv.style.display = 'none';
+        });
+    </script>
+</body>
+</html>
