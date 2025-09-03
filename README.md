@@ -6,7 +6,8 @@ A bold, activist-style landing page for Dr. Jalees Razavi's practitioner-led occ
 
 - **Live Countdown Timer** to the September 13, 2025 global meeting
 - **Multi-Timezone Support** - Shows meeting time in visitor's local timezone plus major global cities
-- **Email Capture System** with validation and user feedback
+- **Zoom Registration Integration** - Direct links to meeting registration
+- **Dual Call-to-Action** - Registration and LinkedIn contact options
 - **Responsive Design** optimized for all devices
 - **Modern CSS Animations** including ticker tape and hover effects
 - **Bold Visual Design** with contrasting colors and typography
@@ -15,7 +16,8 @@ A bold, activist-style landing page for Dr. Jalees Razavi's practitioner-led occ
 
 **Date:** Saturday, September 13, 2025  
 **Time:** 5:00 AM Calgary Time (MDT)  
-**Purpose:** First global practitioner-led forum on occupational medicine standards
+**Purpose:** First global practitioner-led forum on occupational medicine standards  
+**Registration:** [Zoom Meeting Registration](https://us06web.zoom.us/meeting/register/iJEQ8nJXSJiRYzXROECSjA#/registration)
 
 ## Technical Stack
 
@@ -23,7 +25,7 @@ A bold, activist-style landing page for Dr. Jalees Razavi's practitioner-led occ
 - Google Fonts (Inter & Space Mono)
 - CSS Grid and Flexbox for responsive layouts
 - JavaScript timezone handling with Intl API
-- LocalStorage for temporary email collection
+- Direct Zoom registration integration
 
 ## Design Philosophy
 
@@ -31,8 +33,9 @@ This site embodies the "unfiltered" approach with:
 - Direct, no-nonsense messaging
 - Bold color scheme (red, yellow, green, blue accents)
 - Manifesto-style content presentation
-- Clear call-to-action (LinkedIn contact)
+- Dual call-to-action (Registration + LinkedIn contact)
 - Practitioner-focused rather than corporate aesthetic
+- Streamlined user journey focused on meeting participation
 
 ## Local Development
 
@@ -46,9 +49,13 @@ This is a static site that can be deployed to:
 - Vercel
 - Any static hosting service
 
-## Contact
+## Participation
 
-For participation in the movement, contact Dr. Razavi directly on [LinkedIn](https://www.linkedin.com/in/jalees-razavi/).
+**To Join the Meeting:**
+- [Register via Zoom](https://us06web.zoom.us/meeting/register/iJEQ8nJXSJiRYzXROECSjA#/registration) (Practitioners Only)
+
+**General Inquiries:**
+- Contact Dr. Razavi directly on [LinkedIn](https://www.linkedin.com/in/jalees-razavi/)
 
 ---
 
