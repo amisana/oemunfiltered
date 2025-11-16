@@ -382,6 +382,53 @@
             color: #666;
         }
         
+        /* Contributor Collapsible */
+        .contributors-details {
+            margin: 30px 0;
+        }
+        
+        .contributors-details summary {
+            cursor: pointer;
+            font-family: 'Space Mono', monospace;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--accent);
+            padding: 15px 20px;
+            background: white;
+            border: 3px solid var(--text);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            list-style: none;
+            position: relative;
+            transition: all 0.2s;
+        }
+        
+        .contributors-details summary::-webkit-details-marker {
+            display: none;
+        }
+        
+        .contributors-details summary::before {
+            content: '▶';
+            display: inline-block;
+            margin-right: 10px;
+            transition: transform 0.2s;
+        }
+        
+        .contributors-details[open] summary::before {
+            transform: rotate(90deg);
+        }
+        
+        .contributors-details summary:hover {
+            background: var(--yellow);
+            transform: translate(-2px, -2px);
+            box-shadow: 4px 4px 0 var(--text);
+        }
+        
+        .contributors-details[open] summary {
+            box-shadow: 4px 4px 0 var(--accent);
+        }
+        
         /* Key Themes Grid */
         .themes-grid {
             display: grid;
@@ -530,6 +577,11 @@
             
             .contributor-grid {
                 grid-template-columns: 1fr;
+            }
+            
+            .contributors-details summary {
+                font-size: 14px;
+                padding: 12px 15px;
             }
             
             .back-to-top {
@@ -749,7 +801,9 @@
             <h2 class="chapter-title">NOTABLE CONTRIBUTORS</h2>
         </div>
         
-        <div class="contributor-grid">
+        <details class="contributors-details">
+            <summary>View All Contributors (50+)</summary>
+            <div class="contributor-grid">
             <!-- Founders & Core Leadership -->
             <div class="contributor-card">
                 <div class="contributor-name">DR. JALEES RAZAVI</div>
@@ -989,7 +1043,8 @@
                 <div class="contributor-name">DR. ASHISH TRIVEDI</div>
                 <div class="contributor-role">Brunei / OH Physician / Ethics Discussions</div>
             </div>
-        </div>
+            </div>
+        </details>
     </section>
         
         <!-- Building Toward Action -->
